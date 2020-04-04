@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Aplicación de Microblogging</title>
+        <link rel="stylesheet" href="public/microblog.css">
+    </head>
+    <body>
+        <h1>Últimos mensajes</h1>
+        <div class="messages">
+            <div class="message" th:each="message : ${messages}">
+                <div class="message_text" th:text="${message.getText()}">
+                    El texto del mensaje
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
