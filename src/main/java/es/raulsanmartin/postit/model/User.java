@@ -1,21 +1,19 @@
 package es.raulsanmartin.postit.model;
 
 public class User {
-    private Integer id;
+    private String id;
 
     private String name;
 
     private String email;
 
-    private String nick;
-
     private String pswd;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,15 +34,11 @@ public class User {
     }
 
     public String getNick() {
-        return "@" + nick;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
+        return "@" + id;
     }
 
     @Override
     public String toString() {
-        return "User: " + name + " <" + email + ">" + " @" + nick;
+        return "User: " + name + " <" + email + ">" + " @" + id;
     }
 }

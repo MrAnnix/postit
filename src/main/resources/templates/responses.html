@@ -1,0 +1,58 @@
+<div class="tweet" th:each="message : ${messages}">
+  <div class="mensaje">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img class="is-rounded" src="/assets/img/avatar2.png">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <div class="datos">
+            <span class="autor" th:text="${message.getUser().getName()}"></span>
+            <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
+            <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
+          </div>
+          <p th:text="${message.getText()}"></p>
+        </div>
+        <nav class="level is-mobile acciones">
+          <div class="level-left">
+            <a class="level-item no-toggable accion-reply">
+              <span class="icon is-small"><i class="fas fa-reply"></i></span>
+            </a>
+            <a class="level-item">
+              <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+            </a>
+            <a class="level-item accion-activa">
+              <span class="icon is-small"><i class="fas fa-heart"></i></span>
+            </a>
+          </div>
+          <div class="level-right">
+            <a class="tweet-link no-toggable" href="tweet.html">
+              See tweet
+            </a>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+  <div class="card-footer is-hidden">
+    <div class="field">
+      <div class="control">
+          <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+      </div>
+    </div>
+    <div class="card-footer-end">
+      <span class="characters-remaining">280/280</span>
+      <div class="spacer"></div>
+      <div class="control-buttons has-text-centered">
+        <button class="button">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </button>
+        <button class="button">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

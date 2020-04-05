@@ -43,7 +43,7 @@ function showResponses () {
     $(".acciones a.load-responses")
     .removeClass("load-responses")
     .one('click', function () {
-        getDataByURL("./responses.html", 
+        getDataByURL(window.location.url + "/responses", 
                      {tweet_id: "foo"}, //El ID del tweet nos será útil posteriormente
                      function (e) { document.getElementById("responses").innerHTML += e; loadAllEvents(); } );
     })
