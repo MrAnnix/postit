@@ -1,18 +1,500 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Aplicación de Microblogging</title>
-        <link rel="stylesheet" href="public/microblog.css">
-    </head>
-    <body>
-        <h1>Últimos mensajes</h1>
-        <div class="messages">
-            <div class="message" th:each="message : ${messages}">
-                <div class="message_text" th:text="${message.getText()}">
-                    El texto del mensaje
-                </div>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" style="--current-shade:var(--main);">
+  <head>
+    <!-- Basic site needs -->
+    <meta charset="utf-8">
+    <title>Home - Twitter</title>
+    <meta name="description" content="A custom front end for Twitter">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+ 
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" integrity="sha384-5kGFOAqgEKnuF6c2jk2JANKHZgYVt38Wn2dVJENtq1EBCP54/1uzXU5mpxqL8WjN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css"> 
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name=theme-color content=#fe5b5b>
+
+    <!-- Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item app-name" href="">
+            <img src="assets/img/logo.svg" width="30" height="30" alt="Our Twitter Logo">
+            Twitter
+          </a>
+          <!-- Icons for mobile view -->
+          <div class="navbar-menu-mobile is-flex">
+            <div class="navbar-mobile-start is-flex">
+              <a class="navbar-item is-hidden-desktop" style="color: var(--link-hover);">
+                <span class="navbar-icon"><ion-icon name="home-outline"></ion-icon></span>
+              </a>
+              <a class="navbar-item is-hidden-desktop" href="/notifications">
+                <span class="navbar-icon"><ion-icon name="notifications-outline"></ion-icon></span>
+              </a>
+              <a class="navbar-item is-hidden-desktop" href="/messages">
+                <span class="navbar-icon"><ion-icon name="mail-outline"></ion-icon></span>
+              </a>
             </div>
+            <div class="navbar-mobile-spacer"></div>
+            <div class="navbar-mobile-end">
+              <div class="navbar-item dropdown is-hoverable is-flexbox-end is-hidden-desktop">
+                <div class="dropdown-trigger">
+                  <a class="navbar-link navbar-link-mobile">
+                    <img class="navbar-profile" src="assets/img/avatar.png" alt="Avatar">
+                  </a>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                  <div class="dropdown-content">
+                    <a class="navbar-item" href="profile.html">
+                      <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span>
+                      Profile
+                    </a>
+                    <a class="navbar-item" href="#">
+                      <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span>
+                      Settings
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item">
+                      <span class="navbar-icon"><ion-icon name="exit-outline"></ion-icon></span>
+                      Logout
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
+
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" style="color: var(--link-hover);">
+              <span class="navbar-icon"><ion-icon name="home-outline"></ion-icon></span>
+              Home
+            </a>
+            <a class="navbar-item" href="/notifications">
+              <span class="navbar-icon"><ion-icon name="notifications-outline"></ion-icon></span>
+              Notifications
+            </a>
+            <a class="navbar-item" href="/messages">
+              <span class="navbar-icon"><ion-icon name="mail-outline"></ion-icon></span>
+              Messages
+            </a>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="">
+                <img class="navbar-profile" src="assets/img/avatar.png" alt="Avatar">
+                Account
+              </a>
+              <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="profile.html">
+                  <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span>
+                  Profile
+                </a>
+                <a class="navbar-item" href="#">
+                  <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span>
+                  Settings
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  <span class="navbar-icon"><ion-icon name="exit-outline"></ion-icon></span>
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+          
         </div>
-    </body>
+      </nav>
+    </header>
+
+    <div class="columns body-columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+
+
+        <div class="card tweet" th:each="message : ${messages}">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar2.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <div class="datos">
+                    <span class="autor" th:text="${message.getUser().getName()}"></span>
+                    <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
+                    <span class="fecha" th:text="${message.getTimestamp()"></span>
+                  </div>
+                  <p th:text="${message.getText()}"></p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item accion-activa">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        
+        <div class="card tweet">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar2.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <div class="datos">
+                    <span class="autor">Aaron Paul</span>
+                    <span class="nombre-usuario">@apaul</span>
+                    <span class="fecha">3m</span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item accion-activa">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tweet">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="datos">
+                  <span class="autor">John Smith</span>
+                  <span class="nombre-usuario">@johnsmith</span>
+                  <span class="fecha">31m</span>
+                </div>
+                <div class="content">
+                  <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                  </p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tweet">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar3.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="datos">
+                  <span class="autor">Chris Evans</span>
+                  <span class="nombre-usuario">@chrisevans</span>
+                  <span class="fecha">3d</span>
+                </div>
+                <div class="content">
+                  <p>
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                  </p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item accion-activa">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tweet">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="datos">
+                  <span class="autor">John Smith</span>
+                  <span class="nombre-usuario">@johnsmith</span>
+                  <span class="fecha">3d</span>
+                </div>
+                <div class="content">
+                  <p>
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                  </p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tweet">
+          <div class="mensaje">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img class="is-rounded" src="assets/img/avatar.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="datos">
+                  <span class="autor">John Smith</span>
+                  <span class="nombre-usuario">@johnsmith</span>
+                  <span class="fecha">5d</span>
+                </div>
+                <div class="content">
+                  <p>
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                  </p>
+                </div>
+                <nav class="level is-mobile acciones">
+                  <div class="level-left">
+                    <a class="level-item no-toggable accion-reply">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item accion-activa">
+                      <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                  </div>
+                  <div class="level-right">
+                    <a class="tweet-link no-toggable" href="tweet.html">
+                      See tweet
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+          <div class="card-footer is-hidden">
+            <div class="field">
+              <div class="control">
+                  <textarea class="textarea is-medium has-fixed-size" placeholder="Tweet your reply"></textarea>
+              </div>
+            </div>
+            <div class="card-footer-end">
+              <span class="characters-remaining">280/280</span>
+              <div class="spacer"></div>
+              <div class="control-buttons has-text-centered">
+                <button class="button">
+                  <ion-icon name="paper-plane-outline"></ion-icon>
+                </button>
+                <button class="button">
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="assets/js/autosize.min.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  </body>
 </html>

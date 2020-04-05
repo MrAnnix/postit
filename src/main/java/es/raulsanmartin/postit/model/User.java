@@ -7,6 +7,10 @@ public class User {
 
     private String email;
 
+    private String nick;
+
+    private String pswd;
+
     public Integer getId() {
         return id;
     }
@@ -31,8 +35,16 @@ public class User {
         this.email = email;
     }
 
+    public String getNick() {
+        return "@" + nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
     @Override
     public String toString() {
-        return "User: " + name + " <" + email + ">";
+        return "User: " + name + " <" + email + ">" + " @" + nick;
     }
 }

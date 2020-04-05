@@ -21,20 +21,58 @@ public class MainController {
         List<Message> messages = new ArrayList<Message>();
         User user = new User();
         user.setId(1);
-        user.setEmail("mary@example.com");
-        user.setName("mary");
+        user.setEmail("johnsmith@example.com");
+        user.setName("John Smith");
+        user.setNick("johnsmith");
+
         Message message = new Message();
         message.setId(1);
         message.setUser(user);
-        message.setText("Mensaje de prueba");
-        message.setTimestamp(new Date());
+        message.setText("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+        message.setTimestamp(new Date(1586050000));
         messages.add(message);
+
         message = new Message();
         message.setId(2);
         message.setUser(user);
-        message.setText("Otro mensaje de prueba");
-        message.setTimestamp(new Date());
+        message.setText("Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
+        message.setTimestamp(new Date(1582000040));
         messages.add(message);
+
+        message = new Message();
+        message.setId(3);
+        message.setUser(user);
+        message.setText("Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?");
+        message.setTimestamp(new Date(1582000000));
+        messages.add(message);
+
+        user = new User();
+        user.setId(2);
+        user.setEmail("apaul@example.com");
+        user.setName("Aaron Paul");
+        user.setNick("apaul");
+
+        message = new Message();
+        message.setId(2);
+        message.setUser(user);
+        message.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+        message.setTimestamp(new Date(1586080075));
+        messages.add(message);
+
+        user = new User();
+        user.setId(2);
+        user.setEmail("chrisevans@example.com");
+        user.setName("Chris Evans");
+        user.setNick("chrisevans");
+
+        message = new Message();
+        message.setId(2);
+        message.setUser(user);
+        message.setText("Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.");
+        message.setTimestamp(new Date(1586000000));
+        messages.add(message);
+
+        messages.sort((e1, e2) -> e2.getTimestamp().compareTo(e1.getTimestamp()));
         model.addAttribute("messages", messages);
         return "main_view";
     }
