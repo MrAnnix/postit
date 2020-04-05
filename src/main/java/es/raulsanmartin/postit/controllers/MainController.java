@@ -69,7 +69,7 @@ public class MainController {
         message.setId(2);
         message.setUser(user);
         message.setText("Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.");
-        message.setTimestamp(1586000000000L);
+        message.setTimestamp(1481000000000L);
         messages.add(message);
 
         messages.sort((e1, e2) -> new Long(e2.getTimestamp()).compareTo(new Long(e1.getTimestamp())));

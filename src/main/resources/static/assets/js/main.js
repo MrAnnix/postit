@@ -75,9 +75,8 @@ function loadAllEvents() {
     replyTweet();
     showResponses();
     autosize($('.card-footer textarea'));
+    $(".datos>.fecha").text(function () {return timeago.format($(this).attr("timestamp"));});
     countChars();
 };
 
 $(document).ready(loadAllEvents());
-
-$(document).ready($(".datos>.fecha").timeago());

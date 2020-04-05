@@ -131,7 +131,7 @@
                   <div class="datos">
                     <span class="autor" th:text="${message.getUser().getName()}"></span>
                     <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
-                    <span class="fecha" th:timestamp="${message.getTimestamp()/1000}"></span>
+                    <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
                   </div>
                   <p th:text="${message.getText()}"></p>
                 </div>
