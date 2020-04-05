@@ -5,6 +5,10 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Java ###
+bin/
+*.class
+
 ### STS ###
 .apt_generated
 .classpath
