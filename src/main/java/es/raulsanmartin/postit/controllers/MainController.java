@@ -29,21 +29,21 @@ public class MainController {
         message.setId(1);
         message.setUser(user);
         message.setText("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
-        message.setTimestamp(new Date(1586050000));
+        message.setTimestamp(1586050000000L);
         messages.add(message);
 
         message = new Message();
         message.setId(2);
         message.setUser(user);
         message.setText("Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
-        message.setTimestamp(new Date(1582000040));
+        message.setTimestamp(1582000040000L);
         messages.add(message);
 
         message = new Message();
         message.setId(3);
         message.setUser(user);
         message.setText("Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?");
-        message.setTimestamp(new Date(1582000000));
+        message.setTimestamp(1582000000000L);
         messages.add(message);
 
         user = new User();
@@ -56,7 +56,7 @@ public class MainController {
         message.setId(2);
         message.setUser(user);
         message.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
-        message.setTimestamp(new Date(1586080075));
+        message.setTimestamp(1586080075000L);
         messages.add(message);
 
         user = new User();
@@ -69,10 +69,10 @@ public class MainController {
         message.setId(2);
         message.setUser(user);
         message.setText("Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.");
-        message.setTimestamp(new Date(1586000000));
+        message.setTimestamp(1586000000000L);
         messages.add(message);
 
-        messages.sort((e1, e2) -> e2.getTimestamp().compareTo(e1.getTimestamp()));
+        messages.sort((e1, e2) -> new Long(e2.getTimestamp()).compareTo(new Long(e1.getTimestamp())));
         model.addAttribute("messages", messages);
         return "main_view";
     }

@@ -80,3 +80,4 @@ function loadAllEvents() {
 
 $(document).ready(loadAllEvents());
 
+$(document).ready($(".datos>.fecha").timeago());

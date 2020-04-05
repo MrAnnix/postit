@@ -1,7 +1,5 @@
 package es.raulsanmartin.postit.model;
 
-import java.util.Date;
-
 public class Message {
     private Integer id;
 
@@ -11,7 +9,7 @@ public class Message {
 
     private Message responseTo;
 
-    private Date timestamp;
+    private long timestamp;
 
     public Integer getId() {
         return id;
@@ -45,11 +43,11 @@ public class Message {
         this.responseTo = responseTo;
     }
 
-    public Date getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 }

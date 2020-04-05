@@ -131,7 +131,7 @@
                   <div class="datos">
                     <span class="autor" th:text="${message.getUser().getName()}"></span>
                     <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
-                    <span class="fecha" th:text="${message.getTimestamp()"></span>
+                    <span class="fecha" th:timestamp="${message.getTimestamp()/1000}"></span>
                   </div>
                   <p th:text="${message.getText()}"></p>
                 </div>
@@ -494,7 +494,8 @@
   <!-- JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="assets/js/autosize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" integrity="sha256-dW8u4dvEKDThJpWRwLgGugbARnA3O2wqBcVerlg9LMc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.full.min.js" integrity="sha256-7NJCSpiWM0eQMfMyrFtNZp/43bnmuIhCKH+MUt6bHKY=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/js/main.js"></script>
   </body>
 </html>
