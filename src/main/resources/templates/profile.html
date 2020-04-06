@@ -179,9 +179,9 @@
           <div class="mensaje">
             <article class="media">
               <figure class="media-left">
-                <p class="image is-64x64">
+                <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
                   <img class="is-rounded" src="/assets/img/avatar.png">
-                </p>
+                </a>
               </figure>
               <div class="media-content">
                 <div class="datos">
@@ -205,7 +205,7 @@
                     </a>
                   </div>
                   <div class="level-right">
-                    <a class="tweet-link no-toggable" th:href="@{'/postit/'+${message.getId()}}">
+                    <a class="tweet-link no-toggable" th:href="@{'/post/'+${message.getId()}}">
                       See tweet
                     </a>
                   </div>

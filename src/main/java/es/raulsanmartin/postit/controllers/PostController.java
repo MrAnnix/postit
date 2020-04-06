@@ -14,11 +14,11 @@ import es.raulsanmartin.postit.model.Message;
 import es.raulsanmartin.postit.model.User;
 
 @Controller
-@RequestMapping(path = "/postit")
-public class PostitController {
+@RequestMapping(path = "/post")
+public class PostController {
 
     @GetMapping(path = "/{id}")
-    public String postitView(@PathVariable(value="id") String postitId, Model model) {
+    public String postView(@PathVariable(value="id") String postId, Model model) {
         User user = new User();
         user.setId("johnsmith");
         user.setEmail("johnsmith@example.com");
@@ -31,11 +31,11 @@ public class PostitController {
         message.setTimestamp(1586050000000L);
 
         model.addAttribute("message", message);
-        return "postit";
+        return "post";
     }
 
     @GetMapping(path = "/{id}/responses")
-    public String responsesView(@PathVariable(value="id") String postitId, Model model) {
+    public String responsesView(@PathVariable(value="id") String postId, Model model) {
         List<Message> messages = new ArrayList<Message>();
         User user = new User();
         user.setId("johnsmith");

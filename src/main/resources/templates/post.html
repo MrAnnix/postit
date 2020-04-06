@@ -149,9 +149,9 @@
           <div class="mensaje">
             <article class="media">
               <figure class="media-left">
-                <p class="image is-64x64">
-                  <img class="is-rounded" src="/assets/img/avatar.png">
-                </p>
+                <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
+                  <img class="is-rounded" src="/assets/img/avatar3.png">
+                </a>
               </figure>
               <div class="media-content">
                 <div class="datos">
