@@ -16,9 +16,9 @@ public class User {
 
     private String email; //User email
 
-    private byte[] pswd;  //User hashed password
+    private byte[] pswd;  //User's hashed password
 
-    private byte[] salt;  //User salt to hash password with PBKDF2 algorithm, so pswd=hash(salt+realPassword)
+    private byte[] salt;  //User's salt to hash password with PBKDF2 algorithm, so pswd=hash(salt+realPassword)
 
     private String photo; //User profle photo
 
