@@ -49,30 +49,32 @@ public class User {
     }
 
     //PASSWORD HANDLING
-    public Boolean checkPassword(String password) {
+    private byte[] getHashFromPassword(String password) {
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 10000, 512);
             SecretKey key = skf.generateSecret(spec);
-            return Arrays.equals(key.getEncoded(), pswd);
+            return key.getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void setPassword(String password) {
+    private byte[] getRandomSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[8];
         random.nextBytes(salt);
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 10000, 512);
-            SecretKey key = skf.generateSecret(spec);
-            this.salt = salt;
-            this.pswd = key.getEncoded();
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
-        }
+        return salt;
+    }
+
+    public void setPassword(String password) {
+        byte[] salt = getRandomSalt();
+        this.salt = salt;
+        this.pswd = getHashFromPassword(password);
+    }
+
+    public Boolean checkPassword(String password) {
+        return Arrays.equals(getHashFromPassword(password), pswd);
     }
 
     public String getPhoto() {
