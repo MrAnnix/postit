@@ -79,6 +79,10 @@ a.app-name:hover, a.app-name:active, a.app-name:visited {
     color: var(--text-color);
 }
 
+.navbar-item.active {
+    color: var(--link-hover);
+}
+
 .navbar-item>.navbar-icon {
     padding: .3rem .2rem 0 0;
 }
@@ -205,11 +209,11 @@ a.app-name:hover, a.app-name:active, a.app-name:visited {
     color: var(--action-icon-active);
 }
 
-.acciones a.tweet-link {
+.acciones a.post-link {
     color: var(--link);
 }
 
-.acciones a.tweet-link:hover {
+.acciones a.post-link:hover {
     color: var(--link-hover);
 }
 

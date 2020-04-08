@@ -22,29 +22,29 @@ function markActions() {
         });
 };
 
-function replyTweet() {
+function replyPost() {
     $(".acciones a.accion-reply").filter(":not(.has-listener)")
         .addClass("has-listener")
         .click(function () {
-            var cardFooter = $(this).parents(".tweet").children(".card-footer");
+            var cardFooter = $(this).parents(".post").children(".card-footer");
             cardFooter.toggleClass("is-hidden");
             cardFooter.find(".textarea").focus();
         });
 };
 
 function showResponses () {
-    $(".acciones a.tweet-responses").filter(":not(.has-listener)")
+    $(".acciones a.post-responses").filter(":not(.has-listener)")
         .addClass("has-listener")
         .click(function () {
-            var tweet = $(this).parents(".card");
-            tweet.children(".responses").toggleClass("is-hidden");
-            tweet.find(".tweet-responses").toggleClass("is-hidden");});
+            var post = $(this).parents(".card");
+            post.children(".responses").toggleClass("is-hidden");
+            post.find(".post-responses").toggleClass("is-hidden");});
 
     $(".acciones a.load-responses")
     .removeClass("load-responses")
     .one('click', function () {
         getDataByURL(window.location.url + "/responses", 
-                     {tweet_id: "foo"}, //El ID del tweet nos será útil posteriormente
+                     {post_id: "foo"}, //El ID del post nos será útil posteriormente
                      function (e) { document.getElementById("responses").innerHTML += e; loadAllEvents(); } );
     })
 };
@@ -72,7 +72,7 @@ function countChars() {
 
 function loadAllEvents() {
     markActions();    
-    replyTweet();
+    replyPost();
     showResponses();
     autosize($('.card-footer textarea'));
     $(".datos>.fecha").text(function () {return timeago.format($(this).attr("timestamp"));});

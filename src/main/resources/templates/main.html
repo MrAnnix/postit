@@ -2,16 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default"
-      th:with="currentPage='Profile'">
+      th:with="currentPage='Home'">
   <head>
-    <title>Profile</title>
+    <title>Home</title>
   </head>
 
   <body>
     <div layout:fragment="content">
       <div class="columns body-columns">
         <div class="column is-three-fifths is-offset-one-fifth">
-          <div th:replace="fragments/components :: profile-header"></div>
           <div th:each="message : ${messages}">
             <div th:replace="fragments/components :: post"></div>
           </div>

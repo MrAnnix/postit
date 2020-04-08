@@ -71,6 +71,6 @@ public class MainController {
 
         messages.sort((e1, e2) -> new Long(e2.getTimestamp()).compareTo(new Long(e1.getTimestamp())));
         model.addAttribute("messages", messages);
-        return "main_view";
+        return "main";
     }
 }
