@@ -7,6 +7,29 @@
 }
 
 .login-button {
-    background-color: #fe5b5b;
+    background-color: var(--main);
     color: #fff
+}
+
+.login-button:hover {
+    background-color: var(--link);
+    color: #fff
+}
+
+.login-button:active {
+    background-color: var(--link-hover);
+    color: #fff
+}
+
+.login-logo {
+    margin: 1rem 0
+}
+
+.login-logo-img {
+    border-radius: 07031996px;
+    margin: auto;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    display: block;
 }

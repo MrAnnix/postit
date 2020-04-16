@@ -237,10 +237,16 @@ a.app-name:hover, a.app-name:active, a.app-name:visited {
     box-shadow: 0 0 2px var(--action-icon);
 }
 
-.card-footer textarea:focus {
+.card-footer textarea:hover {
     outline: none !important;
     border: none;
     box-shadow: 0 0 2px var(--link-hover);
+}
+
+.card-footer textarea:focus {
+    outline: none !important;
+    border: none;
+    box-shadow: 0 0 2px var(--link);
 }
 
 .card-footer .card-footer-end {
