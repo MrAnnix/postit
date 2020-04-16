@@ -1,4 +1,4 @@
-package es.raulsanmartin.postit.controllers;
+package es.raulsanmartin.postit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
