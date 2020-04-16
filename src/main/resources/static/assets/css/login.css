@@ -33,3 +33,9 @@
     object-fit: cover;
     display: block;
 }
+
+.input:focus {
+    outline: none !important;
+    border-color: var(--link-hover);
+    box-shadow: 0 0 2px var(--link-hover);
+}
