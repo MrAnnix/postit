@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:fragment="head">
   <!-- Basic site needs -->
   <meta charset="utf-8">
@@ -13,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
   <link th:if="${currentPage == 'Profile'}" rel="stylesheet" type="text/css" href="/assets/css/profile.css">
   <link th:if="${currentPage == 'Post'}" rel="stylesheet" type="text/css" href="/assets/css/post.css">
+  <link th:if="${currentPage == 'Login'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name=theme-color content=#fe5b5b>
 

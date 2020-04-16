@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http
             .authorizeRequests()
-                .antMatchers("/login", "/public/**").permitAll()
+                .antMatchers("/login", "/register", "/assets/**", "/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin().loginPage("/login").permitAll()
@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         UserDetails user =
              User.withDefaultPasswordEncoder()
-                .username("user@example.com")
-                .password("password")
+                .username("admin")
+                .password("admin")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);

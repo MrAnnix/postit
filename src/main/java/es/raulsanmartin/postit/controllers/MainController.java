@@ -73,4 +73,9 @@ public class MainController {
         model.addAttribute("messages", messages);
         return "main";
     }
+
+    @GetMapping(path = "/login")
+    public String loginForm() {
+        return "login";
+    }
 }
