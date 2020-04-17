@@ -1,7 +1,7 @@
 # postit
 Simple microblogging web app
 ## Prerequisites
-- Oracle JDK or Open JDK (version 8 or higher)
+- Oracle JDK or OpenJDK (version 8 or higher)
 - MySQL database
 - A compatible browser ;)
 
