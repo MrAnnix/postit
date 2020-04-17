@@ -11,4 +11,5 @@ git clone https://github.com/MrAnnix/postit.git # Or clone your own fork
 cd postit
 chmod +x gradlew
 ./gradlew bootRun
+# Go to http://localhost:8080
 ```
