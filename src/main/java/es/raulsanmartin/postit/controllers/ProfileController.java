@@ -1,7 +1,6 @@
 package es.raulsanmartin.postit.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -46,7 +45,7 @@ public class ProfileController {
         message.setTimestamp(1582000000000L);
         messages.add(message);
 
-        messages.sort((e1, e2) -> new Long(e2.getTimestamp()).compareTo(new Long(e1.getTimestamp())));
+        messages.sort((e1, e2) -> Long.valueOf(e2.getTimestamp()).compareTo(Long.valueOf(e1.getTimestamp())));
         model.addAttribute("user", user);
         model.addAttribute("messages", messages);
         return "profile";
