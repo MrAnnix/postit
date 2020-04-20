@@ -77,4 +77,9 @@ public class MainController {
     public String loginForm() {
         return "login";
     }
+
+    @GetMapping(path = "/register")
+    public String registerForm() {
+        return "register";
+    }
 }

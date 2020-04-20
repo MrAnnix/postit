@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='Register'">
+
+<!-- Head -->
+<head th:replace="fragments/components :: head"></head>
+
+<body>
+  <!-- Content -->
+  <section class="hero is-fullheight login-background">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <div th:if="${param.error}" class="has-text-danger">
+              Invalid username or password.
+            </div>
+            <div th:if="${param.logout}">
+              You have been logged out.
+            </div>
+            <form id="login" class="box login" th:action="@{/register}" method="post">
+              <div class="field">
+                <label for="" class="label">Username</label>
+                <div class="control has-icons-left">
+                  <input type="text" name="username" placeholder="user@example.com" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="label">Email</label>
+                <div class="control has-icons-left">
+                  <input type="text" name="username" placeholder="user@example.com" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="label">Password</label>
+                <div class="control has-icons-left">
+                  <input type="password" name="password" placeholder="********" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="label">Repeat password</label>
+                <div class="control has-icons-left">
+                  <input type="password" name="_password" placeholder="********" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="checkbox">
+                  <input type="checkbox">Remember me
+                </label>
+              </div>
+              <div class="field">
+                <button class="button login-button" type="submit" value="Login">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/components :: footer"></footer>
+</body>
+
+</html>
