@@ -1,28 +1,43 @@
 package es.raulsanmartin.postit.model;
 
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
-import java.security.SecureRandom;
-
+@Entity
 public class User {
-    private String id;    //Nickname w/o @
 
-    private String name;  //User full name
+    @Id
+    @Column(unique = true, nullable = false, length = 32)
+    @NotBlank
+    @Pattern(regexp = "\\w+")
+    @Size(max = 32)
+    private String id;
 
-    private String email; //User email
+    @Column(unique = false, nullable = false, length = 64)
+    @NotBlank
+    @Pattern(regexp = "\\w+")
+    @Size(max = 64)
+    private String name;
 
-    private byte[] pswd;  //User's hashed password
+    @Column(unique = true, nullable = false, length = 64)
+    @Email
+    @NotBlank
+    @Size(max = 64)
+    private String email;
 
-    private byte[] salt;  //User's salt to hash password with PBKDF2 algorithm, so pswd=hash(salt+realPassword)
+    @Column(nullable = false)
+    @NotBlank
+    @Size(min = 8)
+    private String password;
 
-    private String photo; //User profle photo
+    private String photo;
 
-    private String header;//User profile header photo
+    private String header;
 
     public String getId() {
         return id;
@@ -48,33 +63,12 @@ public class User {
         this.email = email;
     }
 
-    //PASSWORD HANDLING
-    private byte[] getHashFromPassword(String password) {
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 10000, 512);
-            SecretKey key = skf.generateSecret(spec);
-            return key.getEncoded();
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private byte[] getRandomSalt() {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[8];
-        random.nextBytes(salt);
-        return salt;
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
-        byte[] salt = getRandomSalt();
-        this.salt = salt;
-        this.pswd = getHashFromPassword(password);
-    }
-
-    public Boolean checkPassword(String password) {
-        return Arrays.equals(getHashFromPassword(password), pswd);
+        this.password = password;
     }
 
     public String getPhoto() {

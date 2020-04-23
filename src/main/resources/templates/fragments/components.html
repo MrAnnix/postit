@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
   <link th:if="${currentPage == 'Profile'}" rel="stylesheet" type="text/css" href="/assets/css/profile.css">
   <link th:if="${currentPage == 'Post'}" rel="stylesheet" type="text/css" href="/assets/css/post.css">
-  <link th:if="${currentPage == 'Login'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
+  <link th:if="${currentPage == 'Login' || currentPage == 'Register'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name=theme-color content=#fe5b5b>
 
@@ -63,7 +63,8 @@
                     <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span> Settings
                   </a>
                   <hr class="navbar-divider">
-                  <a class="navbar-item">
+                  <form id="logout-form" th:action="@{/logout}" method="post"></form>
+                  <a href="#" onclick="$('#logout-form').submit();" class="navbar-item">
                     <span class="navbar-icon"><ion-icon name="exit-outline"></ion-icon></span> Logout
                   </a>
                 </div>
@@ -98,7 +99,7 @@
                 <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span> Settings
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item">
+              <a href="#" onclick="$('#logout-form').submit();" class="navbar-item">
                 <span class="navbar-icon"><ion-icon name="exit-outline"></ion-icon></span> Logout
               </a>
             </div>

@@ -13,26 +13,38 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-            <div th:if="${param.error}" class="has-text-danger">
-              Invalid username or password.
+            <div th:if="${param.uerror}" class="has-text-danger">
+              The username already exists.
             </div>
-            <div th:if="${param.logout}">
-              You have been logged out.
+            <div th:if="${param.eerror}" class="has-text-danger">
+              The email is already registered.
+            </div>
+            <div th:if="${param.perror}" class="has-text-danger">
+              The passwords does not match.
             </div>
             <form id="login" class="box login" th:action="@{/register}" method="post">
               <div class="field">
+                <label for="" class="label">Name</label>
+                <div class="control has-icons-left">
+                  <input type="text" name="name" placeholder="Full name" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-address-card"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
                 <label for="" class="label">Username</label>
                 <div class="control has-icons-left">
-                  <input type="text" name="username" placeholder="user@example.com" class="input" required>
+                  <input type="text" name="id" placeholder="User" class="input" required>
                   <span class="icon is-small is-left">
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-user"></i>
                   </span>
                 </div>
               </div>
               <div class="field">
                 <label for="" class="label">Email</label>
                 <div class="control has-icons-left">
-                  <input type="text" name="username" placeholder="user@example.com" class="input" required>
+                  <input type="email" name="email" placeholder="user@example.com" class="input" required>
                   <span class="icon is-small is-left">
                     <i class="fa fa-envelope"></i>
                   </span>
@@ -57,13 +69,8 @@
                 </div>
               </div>
               <div class="field">
-                <label for="" class="checkbox">
-                  <input type="checkbox">Remember me
-                </label>
-              </div>
-              <div class="field">
                 <button class="button login-button" type="submit" value="Login">
-                  Login
+                  Register
                 </button>
               </div>
             </form>

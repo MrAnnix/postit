@@ -22,6 +22,9 @@
             <div th:if="${param.logout}">
               You have been logged out.
             </div>
+            <div th:if="${param.registered}">
+              You have been registered correctly.
+            </div>
             <form id="login" class="box login" th:action="@{/login}" method="post">
               <div class="field">
                 <label for="" class="label">Username or email</label>
@@ -52,6 +55,7 @@
                 </button>
               </div>
             </form>
+            <a th:href="@{/register}">Don't have an account?</a>
           </div>
         </div>
       </div>
