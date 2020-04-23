@@ -27,27 +27,26 @@
             </div>
             <form id="login" class="box login" th:action="@{/login}" method="post">
               <div class="field">
-                <label for="" class="label">Username or email</label>
+                <label for="username" class="label">Username or email</label>
                 <div class="control has-icons-left">
-                  <input type="text" name="username" placeholder="user@example.com" class="input" required>
+                  <input type="text" name="username" placeholder="user@example.com" class="input" autocomplete="username" required>
                   <span class="icon is-small is-left">
                     <i class="fa fa-envelope"></i>
                   </span>
                 </div>
               </div>
               <div class="field">
-                <label for="" class="label">Password</label>
+                <label for="password" class="label">Password</label>
                 <div class="control has-icons-left">
-                  <input type="password" name="password" placeholder="********" class="input" required>
+                  <input type="password" name="password" placeholder="********" class="input" autocomplete="current-password" required>
                   <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                   </span>
                 </div>
               </div>
               <div class="field">
-                <label for="" class="checkbox">
-                  <input type="checkbox">Remember me
-                </label>
+                <input type="checkbox" name="rememberme">
+                <label for="rememberme" class="checkbox">Remember me</label>                           
               </div>
               <div class="field">
                 <button class="button login-button" type="submit" value="Login">

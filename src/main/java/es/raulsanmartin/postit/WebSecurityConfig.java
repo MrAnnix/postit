@@ -27,6 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/register", "/assets/**", "/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+            .rememberMe().rememberMeParameter("rememberme")
+                .key("uniqueAndSecret")
+                .tokenValiditySeconds(86400)
+                .userDetailsService(userDetailsService)
+                .and()
             .formLogin().loginPage("/login").permitAll()
                 .and()
             .logout().permitAll();
