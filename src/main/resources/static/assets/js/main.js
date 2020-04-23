@@ -70,6 +70,19 @@ function countChars() {
         });
 };
 
+function tellUsSomething(){
+    $("#in-post textarea")
+        .focus(function(){$(this).parents(".card")
+                                 .find(".characters-remaining")
+                                 .removeClass("is-hidden")});
+    
+    $("#in-post textarea")
+        .blur(function(){$(this).filter(function() {return !this.value.length;})
+                                .parents(".card")
+                                .find(".characters-remaining")
+                                .addClass("is-hidden")})
+}
+
 function loadAllEvents() {
     markActions();    
     replyPost();
@@ -77,6 +90,7 @@ function loadAllEvents() {
     autosize($('.card-footer textarea'));
     $(".datos>.fecha").text(function () {return timeago.format($(this).attr("timestamp"));});
     countChars();
+    tellUsSomething();
 };
 
 $(document).ready(loadAllEvents());

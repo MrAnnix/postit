@@ -11,6 +11,7 @@
     <div layout:fragment="content">
       <div class="columns body-columns">
         <div class="column is-three-fifths is-offset-one-fifth">
+          <div th:replace="fragments/components :: in-post"></div>
           <div th:each="message : ${messages}">
             <div th:replace="fragments/components :: post"></div>
           </div>
