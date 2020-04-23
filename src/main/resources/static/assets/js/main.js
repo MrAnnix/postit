@@ -70,14 +70,6 @@ function countChars() {
         });
 };
 
-function tellUsSomething(){
-    $('.card-footer characters-remaining').filter(".is-hidden")
-        .on(function (){
-            remaining = $(this).parents(".card-footer").find(".characters-remaining");
-            remaining.removeClass(".is-hidden");
-    });
-}
-
 function loadAllEvents() {
     markActions();    
     replyPost();
@@ -85,7 +77,6 @@ function loadAllEvents() {
     autosize($('.card-footer textarea'));
     $(".datos>.fecha").text(function () {return timeago.format($(this).attr("timestamp"));});
     countChars();
-    tellUsSomething();
 };
 
 $(document).ready(loadAllEvents());
