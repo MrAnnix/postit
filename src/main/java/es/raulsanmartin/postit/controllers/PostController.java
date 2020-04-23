@@ -73,6 +73,7 @@ public class PostController {
         messages.add(message);
 
         messages.sort((e1, e2) -> Long.valueOf(e2.getTimestamp()).compareTo(Long.valueOf(e1.getTimestamp())));
+        model.addAttribute("user", user);
         model.addAttribute("messages", messages);
         return "responses";
     }

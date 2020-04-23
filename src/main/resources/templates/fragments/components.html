@@ -56,7 +56,7 @@
               </div>
               <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div class="dropdown-content">
-                  <a class="navbar-item" href="profile.html">
+                  <a class="navbar-item" th:href="@{'/user/'+${user.getId()}}">
                     <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span> Profile
                   </a>
                   <a class="navbar-item" href="#">
@@ -92,7 +92,7 @@
               <img class="navbar-profile" src="/assets/img/avatar.png" alt="Avatar"> Account
             </a>
             <div class="navbar-dropdown is-boxed">
-              <a class="navbar-item" href="profile.html">
+              <a class="navbar-item" th:href="@{'/user/'+${user.getId()}}">
                 <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span> Profile
               </a>
               <a class="navbar-item" href="#">
