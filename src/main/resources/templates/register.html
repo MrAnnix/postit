@@ -61,29 +61,35 @@
                 <p th:if="${param.passwords_match}" class="has-text-danger">
                   The password does not match.
                 </p>
-                <div class="control has-icons-left">
-                  <input type="password" name="password" placeholder="********" class="input" required>
+                <div class="control has-icons-left has-icons-right">
+                  <input id="password" type="password" name="password" placeholder="********" class="input" required>
                   <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
+                  </span>
+                  <span id="checkPassword" class="icon is-small is-right is-hidden">
+                    <i class="fas fa-check"></i>
                   </span>
                 </div>
               </div>
               <div class="field">
                 <label for="" class="label">Repeat password</label>
-                <div class="control has-icons-left">
-                  <input type="password" name="passwordRepeat" placeholder="********" class="input" required>
+                <div class="control has-icons-left has-icons-right">
+                  <input id="passwordRepeat" type="password" name="passwordRepeat" placeholder="********" class="input" required>
                   <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
+                  </span>
+                  <span id="checkPasswordRepeat" class="icon is-small is-right is-hidden">
+                    <i class="fas fa-check"></i>
                   </span>
                 </div>
               </div>
               <div class="field">
-                <button class="button login-button" type="submit" value="Login">
+                <button id="formButton" class="button login-button" type="submit" value="Login" disabled>
                   Register
                 </button>
               </div>
             </form>
-            <a th:href="@{/login}">I have an account</a>
+            <a th:href="@{/login}">Have an account?</a>
           </div>
         </div>
       </div>

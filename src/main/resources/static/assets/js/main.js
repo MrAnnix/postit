@@ -83,6 +83,45 @@ function tellUsSomething(){
                                 .addClass("is-hidden")})
 }
 
+function checkPasswords(){
+    $("#passwordRepeat").on('input', function() {
+        var pwd = $("#password").val();
+        var rpwd = $("#passwordRepeat").val();
+        if((pwd == rpwd) && (rpwd !== "") && (rpwd.length >= 8)){
+            $("#passwordRepeat").removeClass("is-danger");
+            $("#passwordRepeat").addClass("is-success");
+            $("#checkPasswordRepeat").removeClass("is-hidden");
+            $("#formButton").prop("disabled", false);
+        }else{
+            $("#passwordRepeat").removeClass("is-success");
+            $("#formButton").prop("disabled", true);
+            if(rpwd !== ""){
+                $("#passwordRepeat").addClass("is-danger");
+                $("#checkPasswordRepeat").addClass("is-hidden");
+            }else{
+                $("#passwordRepeat").removeClass("is-danger");
+            }
+        } 
+    });
+
+    $("#password").on('input', function() {
+        var pwd = $("#password").val();
+        if((pwd !== "") && (pwd.length >= 8)){
+            $("#password").removeClass("is-danger");
+            $("#password").addClass("is-success");
+            $("#checkPassword").removeClass("is-hidden");
+        }else{
+            $("#password").removeClass("is-success");
+            if(pwd !== ""){
+                $("#password").addClass("is-danger");
+                $("#checkPassword").addClass("is-hidden");
+            }else{
+                $("#password").removeClass("is-danger");
+            }
+        }
+    });
+}
+
 function loadAllEvents() {
     markActions();    
     replyPost();
@@ -91,6 +130,7 @@ function loadAllEvents() {
     $(".datos>.fecha").text(function () {return timeago.format($(this).attr("timestamp"));});
     countChars();
     tellUsSomething();
+    checkPasswords();
 };
 
 $(document).ready(loadAllEvents());
