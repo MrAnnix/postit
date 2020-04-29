@@ -123,7 +123,7 @@
       <article class="media">
         <figure class="media-left">
           <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
-            <img class="is-rounded" src="/assets/img/avatar2.png">
+            <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
           </a>
         </figure>
         <div class="media-content">
@@ -159,7 +159,7 @@
     <div class="card-footer is-hidden">
       <div class="field">
         <div class="control">
-          <textarea class="textarea is-medium has-fixed-size" placeholder="Post your reply"></textarea>
+          <textarea class="textarea is-medium has-fixed-size" placeholder="Post your reply"></textarea>                  
         </div>
       </div>
       <div class="card-footer-end">
@@ -178,40 +178,42 @@
   </div>
 
   <div class="card post" id="in-post" th:fragment="in-post">
-    <div class="mensaje">
-      <article class="media">
-        <figure class="media-left">
-          <a class="image is-64x64" href="">
-            <img class="is-rounded" src="/assets/img/avatar2.png">
-          </a>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <div class="datos">
-              Hola <span th:text="${#authentication.principal.username}"></span>
-            </div>
+    <form th:action="@{/post}" method="post">
+      <div class="mensaje">
+        <article class="media">
+          <figure class="media-left">
+            <a class="image is-64x64" href="">
+              <img class="is-rounded" th:src="${user.getPhoto()}">
+            </a>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <div class="datos">
+                Hola <span th:text="${user.getId()}"></span>
+              </div>
+          </div>
+        </article>
+      </div>
+      <div class="card-footer">
+        <div class="field">
+          <div class="control">
+            <textarea class="textarea is-medium has-fixed-size" name="text" placeholder="How you doin?"></textarea>
+          </div>
         </div>
-      </article>
-    </div>
-    <div class="card-footer">
-      <div class="field">
-        <div class="control">
-          <textarea class="textarea is-medium has-fixed-size" placeholder="How you doin?"></textarea>
+        <div class="card-footer-end">
+          <span class="characters-remaining is-hidden">280/280</span>
+          <div class="spacer"></div>
+          <div class="control-buttons has-text-centered">
+            <button class="button">
+              <ion-icon name="images-outline"></ion-icon>
+            </button>
+            <button class="button" type="submit">
+              Postit
+            </button>
+          </div>
         </div>
       </div>
-      <div class="card-footer-end">
-        <span class="characters-remaining is-hidden">280/280</span>
-        <div class="spacer"></div>
-        <div class="control-buttons has-text-centered">
-          <button class="button">
-            <ion-icon name="images-outline"></ion-icon>
-          </button>
-          <button class="button">
-            Postit
-          </button>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 
   <div class="card" th:fragment="post-view">
@@ -342,12 +344,12 @@
 
   <div class="profile-header" th:fragment="profile-header">
     <div class="profile-header-image">
-      <img class="header-image" src="/assets/img/profile-header-image.jpg" alt="Profile header image">
+      <img class="header-image" th:src="${user.getHeader()}" alt="Profile header image">
     </div>
   
     <div class="profile-header-data">
       <div class="profile-header-user-image image">
-        <img class="profile-header-user-image__ is-rounded" src="/assets/img/avatar.png" alt="profile image">
+        <img class="profile-header-user-image__ is-rounded" th:src="${user.getPhoto()}" alt="profile image">
       </div>
       <div class="profile-header-data__">
         <div class="profile-header-metadata">
@@ -358,12 +360,12 @@
         <div class="profile-header-buttons">
           <div class="profile-details">
             <div class="counter">
-              <a class="following-counter" href="https://twitter.com"><span class="counter-number">49</span>
+              <a class="following-counter" href="/"><span class="counter-number">49</span>
             <span class="counter-label">Following</span>
             </a>
             </div>
             <div class="counter">
-              <a class="followers-counter" href="https://twitter.com"><span class="counter-number">235</span>
+              <a class="followers-counter" href="/"><span class="counter-number">235</span>
             <span class="counter-label">Followers</span>
             </a>
             </div>

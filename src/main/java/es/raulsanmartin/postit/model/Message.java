@@ -1,14 +1,32 @@
 package es.raulsanmartin.postit.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 280)
     private String text;
 
+    @ManyToOne(optional = false)
     private User user;
 
+    @ManyToOne
     private Message responseTo;
 
+    @Column(nullable = false)
     private long timestamp;
 
     public Integer getId() {

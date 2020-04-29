@@ -1,8 +1,13 @@
 package es.raulsanmartin.postit.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -35,9 +40,13 @@ public class User {
     @Size(min = 8)
     private String password;
 
-    private String photo;
+    private String photo = "/assets/img/avatar2.png";
 
-    private String header;
+    private String header = "/assets/img/profile-header-image.jpg";
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private List<Message> messages;
 
     public String getId() {
         return id;
@@ -61,6 +70,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public String getPassword() {
@@ -89,6 +102,10 @@ public class User {
 
     public String getNick() {
         return "@" + id;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
     }
 
     @Override
