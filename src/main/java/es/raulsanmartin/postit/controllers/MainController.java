@@ -70,11 +70,12 @@ public class MainController {
         if (user.getPassword().equals(passwordRepeat)) {
             userService.register(user);
         } else {
-            /*Este error no deberia ser alcanzable ya que controlamos 
+            /********************************************************
+            Este error no deberia ser alcanzable ya que controlamos 
             desde el lado del cliente, que las contraseñas coincidan. 
             No siendo posible el envio del formulario mientras esto 
             no se cumpla.
-            */
+            ********************************************************/
             return "redirect:register?passwords_match";
         }
         return "redirect:login?registered";

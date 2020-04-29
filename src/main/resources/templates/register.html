@@ -22,6 +22,9 @@
             <form id="login" class="box login" th:action="@{/register}" th:object="${user}" method="post">
               <div class="field">
                 <label for="" class="label" th:field="*{name}">Name</label>
+                <p th:if="${#fields.hasErrors('name')}" class="has-text-danger">
+                  The name is not valid.
+                </p>
                 <div class="control has-icons-left">
                   <input type="text" name="name" placeholder="Full name" class="input" required>
                   <span class="icon is-small is-left">

@@ -25,7 +25,7 @@ public class User {
 
     @Column(unique = false, nullable = false, length = 64)
     @NotBlank
-    @Pattern(regexp = "\\w+")
+    @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$")
     @Size(max = 64)
     private String name;
 
