@@ -51,7 +51,7 @@
             <div class="navbar-item dropdown is-hoverable is-flexbox-end is-hidden-desktop">
               <div class="dropdown-trigger">
                 <a class="navbar-link navbar-link-mobile">
-                  <img class="navbar-profile" src="/assets/img/avatar.png" alt="Avatar">
+                  <img class="navbar-profile" th:src="${user.getPhoto()}" alt="Avatar">
                 </a>
               </div>
               <div class="dropdown-menu" id="dropdown-menu3" role="menu">
@@ -89,7 +89,7 @@
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href="">
-              <img class="navbar-profile" src="/assets/img/avatar.png" alt="Avatar"> Account
+              <img class="navbar-profile" th:src="${user.getPhoto()}" alt="Avatar"> Account
             </a>
             <div class="navbar-dropdown is-boxed">
               <a class="navbar-item" th:href="@{'/user/'+${user.getId()}}">
@@ -118,72 +118,72 @@
     <script type="text/javascript" src="/assets/js/main.js"></script>
   </footer>    
 
-  <div class="card post" th:fragment="post">
-    <div class="mensaje">
-      <article class="media">
-        <figure class="media-left">
-          <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
-            <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
-          </a>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <div class="datos">
-              <span class="autor" th:text="${message.getUser().getName()}"></span>
-              <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
-              <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
+  <div class="card" th:fragment="post">
+    <form class="post" th:action="@{/post}" method="post">
+      <div class="mensaje">
+        <article class="media">
+          <figure class="media-left">
+            <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
+              <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
+            </a>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <div class="datos">
+                <span class="autor" th:text="${message.getUser().getName()}"></span>
+                <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
+                <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
+              </div>
+              <p th:text="${message.getText()}"></p>
             </div>
-            <p th:text="${message.getText()}"></p>
+            <nav class="level is-mobile acciones">
+              <div class="level-left">
+                <a class="level-item no-toggable accion-reply">
+                  <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+              <div class="level-right">
+                <a class="post-link no-toggable" th:href="@{'/post/'+${message.getId()}}">
+                  See post
+                </a>
+              </div>
+            </nav>
           </div>
-          <nav class="level is-mobile acciones">
-            <div class="level-left">
-              <a class="level-item no-toggable accion-reply">
-                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-              </a>
-            </div>
-            <div class="level-right">
-              <a class="post-link no-toggable" th:href="@{'/post/'+${message.getId()}}">
-                See post
-              </a>
-            </div>
-          </nav>
+        </article>
+      </div>
+      <div class="card-footer is-hidden">
+        <div class="field">
+          <div class="control">
+            <textarea class="textarea is-medium has-fixed-size" name="text" placeholder="Post your reply"></textarea>
+            <input type="hidden" name="responseTo" th:value="${message.getId()}">               
+          </div>
         </div>
-      </article>
-    </div>
-    <div class="card-footer is-hidden">
-      <div class="field">
-        <div class="control">
-          <textarea class="textarea is-medium has-fixed-size" placeholder="Post your reply"></textarea>                  
+        <div class="card-footer-end">
+          <span class="characters-remaining">280/280</span>
+          <div class="spacer"></div>
+          <div class="control-buttons has-text-centered">
+            <button class="button" type="submit">
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="card-footer-end">
-        <span class="characters-remaining">280/280</span>
-        <div class="spacer"></div>
-        <div class="control-buttons has-text-centered">
-          <button class="button">
-            <ion-icon name="paper-plane-outline"></ion-icon>
-          </button>
-          <button class="button">
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </button>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 
-  <div class="card post" id="in-post" th:fragment="in-post">
-    <form th:action="@{/post}" method="post">
+  <div class="card" id="in-post" th:fragment="in-post">
+    <form class="post" th:action="@{/post}" method="post">
       <div class="mensaje">
         <article class="media">
           <figure class="media-left">
             <a class="image is-64x64" href="">
-              <img class="is-rounded" th:src="${user.getPhoto()}">
+              <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
             </a>
           </figure>
           <div class="media-content">
@@ -204,11 +204,8 @@
           <span class="characters-remaining is-hidden">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button">
-              <ion-icon name="images-outline"></ion-icon>
-            </button>
             <button class="button" type="submit">
-              Postit
+              <ion-icon name="paper-plane-outline"></ion-icon>
             </button>
           </div>
         </div>
@@ -217,12 +214,12 @@
   </div>
 
   <div class="card" th:fragment="post-view">
-    <div class="post">
+    <form class="post" th:action="@{/post}" method="post">
       <div class="mensaje">
         <article class="media">
           <figure class="media-left">
             <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
-              <img class="is-rounded" src="/assets/img/avatar3.png">
+              <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
             </a>
           </figure>
           <div class="media-content">
@@ -261,85 +258,83 @@
       <div class="card-footer is-hidden">
         <div class="field">
           <div class="control">
-              <textarea class="textarea is-medium has-fixed-size" placeholder="Post your reply"></textarea>
+              <textarea class="textarea is-medium has-fixed-size" name="text" placeholder="Post your reply"></textarea>
+              <input type="hidden" name="responseTo" th:value="${message.getId()}">
           </div>
         </div>
         <div class="card-footer-end">
           <span class="characters-remaining">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button">
+            <button class="button" type="submit">
               <ion-icon name="paper-plane-outline"></ion-icon>
-            </button>
-            <button class="button">
-              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
     <div class="responses is-hidden" id="responses">
       <div class="responses-separator"></div>
     </div>
   </div>
 
   <div class="post" th:fragment="post-response">
-    <div class="mensaje">
-      <article class="media">
-        <figure class="media-left">
-          <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
-            <img class="is-rounded" src="/assets/img/avatar2.png">
-          </a>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <div class="datos">
-              <span class="autor" th:text="${message.getUser().getName()}"></span>
-              <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
-              <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
+    <form th:action="@{/post}" method="post">
+      <div class="mensaje">
+        <article class="media">
+          <figure class="media-left">
+            <a class="image is-64x64" th:href="@{'/user/'+${message.getUser().getId()}}">
+              <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
+            </a>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <div class="datos">
+                <span class="autor" th:text="${message.getUser().getName()}"></span>
+                <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
+                <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
+              </div>
+              <p th:text="${message.getText()}"></p>
             </div>
-            <p th:text="${message.getText()}"></p>
+            <nav class="level is-mobile acciones">
+              <div class="level-left">
+                <a class="level-item no-toggable accion-reply">
+                  <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+              <div class="level-right">
+                <a class="post-link no-toggable" th:href="@{'/post/'+${message.getId()}}">
+                  See post
+                </a>
+              </div>
+            </nav>
           </div>
-          <nav class="level is-mobile acciones">
-            <div class="level-left">
-              <a class="level-item no-toggable accion-reply">
-                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-              </a>
-            </div>
-            <div class="level-right">
-              <a class="post-link no-toggable" th:href="@{'/post/'+${message.getId()}}">
-                See post
-              </a>
-            </div>
-          </nav>
+        </article>
+      </div>
+      <div class="card-footer is-hidden">
+        <div class="field">
+          <div class="control">
+            <textarea class="textarea is-medium has-fixed-size" name="text" placeholder="Post your reply"></textarea>
+            <input type="hidden" name="responseTo" th:value="${message.getId()}">
+          </div>
         </div>
-      </article>
-    </div>
-    <div class="card-footer is-hidden">
-      <div class="field">
-        <div class="control">
-          <textarea class="textarea is-medium has-fixed-size" placeholder="Post your reply"></textarea>
+        <div class="card-footer-end">
+          <span class="characters-remaining">280/280</span>
+          <div class="spacer"></div>
+          <div class="control-buttons has-text-centered">
+            <button class="button" type="submit">
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="card-footer-end">
-        <span class="characters-remaining">280/280</span>
-        <div class="spacer"></div>
-        <div class="control-buttons has-text-centered">
-          <button class="button">
-            <ion-icon name="paper-plane-outline"></ion-icon>
-          </button>
-          <button class="button">
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </button>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 
   <div class="profile-header" th:fragment="profile-header">

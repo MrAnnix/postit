@@ -27,7 +27,7 @@ public class ProfileController {
     @GetMapping(path = "/{id}")
     public String profileView(@PathVariable(value="id") String userId, Model model) {
         User user = userRepository.findById(userId);
-        List<Message> messages = messageRepository.findByUserOrderByTimestampDesc(user);
+        List<Message> messages = messageRepository.findByUserAndResponseToIsNullOrderByTimestampDesc(user);
 
         model.addAttribute("user", user);
         model.addAttribute("messages", messages);

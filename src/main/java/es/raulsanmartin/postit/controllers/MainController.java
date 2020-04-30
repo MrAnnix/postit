@@ -35,7 +35,7 @@ public class MainController {
 
     @GetMapping(path = "/")
     public String mainView(Principal principal, Model model) {
-        List<Message> messages = messageRepository.findFirst10ByOrderByTimestampDesc();
+        List<Message> messages = messageRepository.findFirst10ByResponseToIsNullOrderByTimestampDesc();
         
         User user = userRepository.findByEmail(principal.getName());
 

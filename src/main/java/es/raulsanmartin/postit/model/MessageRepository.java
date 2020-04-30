@@ -7,5 +7,11 @@ import org.springframework.data.repository.CrudRepository;
 public interface MessageRepository extends CrudRepository<Message, Integer> {
     List<Message> findFirst10ByOrderByTimestampDesc();
 
+    List<Message> findFirst10ByResponseToIsNullOrderByTimestampDesc();
+
     List<Message> findByUserOrderByTimestampDesc(User user);
+
+    List<Message> findByUserAndResponseToIsNullOrderByTimestampDesc(User user);
+
+    List<Message> findByResponseToOrderByTimestampAsc(Message message);
 }
