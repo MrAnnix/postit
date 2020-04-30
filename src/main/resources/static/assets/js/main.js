@@ -1,5 +1,4 @@
 function getDataByURL(url, datos, callback) {
-    console.log(url, datos, callback);
     $.ajax({
       url: url,
       data: datos,
@@ -43,8 +42,8 @@ function showResponses () {
     $(".acciones a.load-responses")
     .removeClass("load-responses")
     .one('click', function () {
-        getDataByURL(window.location.url + "/responses", 
-                     {post_id: "foo"}, //El ID del post nos será útil posteriormente
+        getDataByURL(window.location.href + "/responses", 
+                     null,
                      function (e) { document.getElementById("responses").innerHTML += e; loadAllEvents(); } );
     })
 };

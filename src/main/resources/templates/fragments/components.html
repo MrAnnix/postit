@@ -183,7 +183,7 @@
         <article class="media">
           <figure class="media-left">
             <a class="image is-64x64" href="">
-              <img class="is-rounded" th:src="${message.getUser().getPhoto()}">
+              <img class="is-rounded" th:src="${user.getPhoto()}">
             </a>
           </figure>
           <div class="media-content">
@@ -278,8 +278,8 @@
     </div>
   </div>
 
-  <div class="post" th:fragment="post-response">
-    <form th:action="@{/post}" method="post">
+  <div class="post-response" th:fragment="post-response">
+    <form class="post" th:action="@{/post}" method="post">
       <div class="mensaje">
         <article class="media">
           <figure class="media-left">

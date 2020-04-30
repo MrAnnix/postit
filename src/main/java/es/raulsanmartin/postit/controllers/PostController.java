@@ -1,7 +1,6 @@
 package es.raulsanmartin.postit.controllers;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import java.util.Date;
@@ -54,7 +53,7 @@ public class PostController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Message not found");
         }
 
-        List<Message> messages = messageRepository.findByResponseToOrderByTimestampAsc(message);
+        List<Message> messages = messageRepository.findByResponseToOrderByTimestampAsc(message.get());
 
         model.addAttribute("messages", messages);
         return "responses";
