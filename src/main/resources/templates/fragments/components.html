@@ -187,10 +187,13 @@
             </a>
           </figure>
           <div class="media-content">
+            <div class="datos">
+              <span class="autor" th:text="${'Hi '+user.getName()+'!'}"></span>
+            </div>
             <div class="content">
-              <div class="datos">
-                Hola <span th:text="${user.getId()}"></span>
-              </div>
+              <hr/>
+              <p>Welcome to Postit.</p>
+            </div>              
           </div>
         </article>
       </div>
