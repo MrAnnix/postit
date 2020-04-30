@@ -5,7 +5,7 @@
   <!-- Basic site needs -->
   <meta charset="utf-8">
   <title th:if="${currentPage != 'Post'}" th:text="${currentPage+' - Postit'}">Template title</title>
-  <title th:if="${currentPage == 'Post'}" th:text="${message.getUser().getId()+ 'in Postit'}">Template title</title>
+  <title th:if="${currentPage == 'Post'}" th:text="${message.getUser().getId()+ ' in Postit'}">Template title</title>
   <meta name="description" content="Post all you want">
   <link rel="shortcut icon" href="/assets/img/favicon.png">
 
