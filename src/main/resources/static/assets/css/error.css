@@ -1,0 +1,27 @@
+.error-background {
+    background-color: #EEE9E9
+}
+
+.error-logo {
+    margin: 1rem 0
+}
+
+.error-logo-img {
+    border-radius: 07031996px;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+h1 {
+    font-size: 8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+}

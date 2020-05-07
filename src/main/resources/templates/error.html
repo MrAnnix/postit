@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='Error'">
+
+<!-- Head -->
+<head th:replace="fragments/components :: head"></head>
+
+<body>
+  <!-- Content -->
+  <section class="hero is-fullheight error-background">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">  
+            <div class="error-logo">             
+              <img th:if="${errorCode == '401'}" class="error-logo-img" src="/assets/img/gandalf.png" alt="You shall not pass">
+              <img th:if="${errorCode == '403'}" class="error-logo-img" src="/assets/img/gandalf.png" alt="You shall not pass">
+              <img th:if="${errorCode == '404'}" class="error-logo-img" src="/assets/img/logo.svg" alt="Our Postit Logo">
+              <img th:if="${(errorCode != '401')&&(errorCode != '403')&&(errorCode != '404')}" class="error-logo-img" src="/assets/img/broken.png" alt="Broken">
+            </div>
+            <h1 th:text="${errorCode}">Error code</h1>
+            <h2 th:text="${errorDescription}">Error description</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/components :: footer"></footer>
+</body>
+
+</html>

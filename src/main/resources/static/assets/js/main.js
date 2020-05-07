@@ -57,6 +57,7 @@ function countChars() {
             counter = 280 - text.length;
             remaining = $(this).parents(".card-footer").find(".characters-remaining");
             remaining.text(counter + "/280");
+
             if (counter < 1) {
                 remaining.removeClass("has-text-warning");
                 remaining.addClass("has-text-danger");
@@ -65,6 +66,12 @@ function countChars() {
                 remaining.addClass("has-text-warning");
             } else {
                 remaining.removeClass("has-text-danger has-text-warning");
+            }
+
+            if((counter < 0) || (counter >= 280)) {
+                $(this).parents(".card-footer").find(".control-buttons>button").prop('disabled', true);
+            } else {
+                $(this).parents(".card-footer").find(".control-buttons>button").prop('disabled', false);
             }
         });
 };

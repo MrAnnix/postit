@@ -15,6 +15,7 @@
   <link th:if="${currentPage == 'Profile'}" rel="stylesheet" type="text/css" href="/assets/css/profile.css">
   <link th:if="${currentPage == 'Post'}" rel="stylesheet" type="text/css" href="/assets/css/post.css">
   <link th:if="${currentPage == 'Login' || currentPage == 'Register'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
+  <link th:if="${currentPage == 'Error'}" rel="stylesheet" type="text/css" href="/assets/css/error.css">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name=theme-color content=#fe5b5b>
 
@@ -168,7 +169,7 @@
           <span class="characters-remaining">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button" type="submit">
+            <button class="button" type="submit" disabled="">
               <ion-icon name="paper-plane-outline"></ion-icon>
             </button>
           </div>
@@ -207,7 +208,7 @@
           <span class="characters-remaining is-hidden">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button" type="submit">
+            <button class="button" type="submit" disabled="">
               <ion-icon name="paper-plane-outline"></ion-icon>
             </button>
           </div>
@@ -269,7 +270,7 @@
           <span class="characters-remaining">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button" type="submit">
+            <button class="button" type="submit" disabled="">
               <ion-icon name="paper-plane-outline"></ion-icon>
             </button>
           </div>
@@ -331,7 +332,7 @@
           <span class="characters-remaining">280/280</span>
           <div class="spacer"></div>
           <div class="control-buttons has-text-centered">
-            <button class="button" type="submit">
+            <button class="button" type="submit" disabled="">
               <ion-icon name="paper-plane-outline"></ion-icon>
             </button>
           </div>
