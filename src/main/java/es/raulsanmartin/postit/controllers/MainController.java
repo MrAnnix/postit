@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.raulsanmartin.postit.services.CaptchaValidationService;
 import es.raulsanmartin.postit.model.Message;
 import es.raulsanmartin.postit.model.MessageRepository;
 import es.raulsanmartin.postit.model.User;
@@ -23,6 +24,9 @@ import es.raulsanmartin.postit.model.UserRepository;
 @Controller
 @RequestMapping(path = "/")
 public class MainController {
+
+    @Autowired
+    private CaptchaValidationService captchaService;
 
     @Autowired
     private UserService userService;
@@ -57,7 +61,17 @@ public class MainController {
     @PostMapping(path = "/register")
     public String register(@Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult,
-                           @RequestParam String passwordRepeat) {
+                           @RequestParam String passwordRepeat,
+                           @RequestParam String clientCaptchaResponse) {        
+        try {
+            if (!captchaService.validateCaptcha(clientCaptchaResponse)) {
+                return "redirect:register?invalid_captcha";
+            }
+        } catch (Throwable t) {
+            // Lo suyo es hacerlo con un logger.
+            System.err.println(t);
+            return "redirect:register?invalid_captcha";
+        }
         if (bindingResult.hasErrors()) {
             return "register";
         }
