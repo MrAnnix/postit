@@ -153,7 +153,7 @@
                 <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
                 <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
               </div>
-              <p th:text="${message.getText()}"></p>
+              <p th:utext="${message.getText()}"></p>
             </div>
             <nav class="level is-mobile acciones">
               <div class="level-left">
@@ -250,7 +250,7 @@
               <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
             </div>
             <div class="content">
-              <p th:text="${message.getText()}"></p>
+              <p th:utext="${message.getText()}"></p>
             </div>
             <nav class="level is-mobile acciones">
               <div class="level-left">
@@ -314,7 +314,7 @@
                 <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
                 <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
               </div>
-              <p th:text="${message.getText()}"></p>
+              <p th:utext="${message.getText()}"></p>
             </div>
             <nav class="level is-mobile acciones">
               <div class="level-left">
