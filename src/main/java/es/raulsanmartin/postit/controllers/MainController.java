@@ -74,7 +74,8 @@ public class MainController {
     public String register(@Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult,
                            @RequestParam String passwordRepeat,
-                           @RequestParam String clientCaptchaResponse) {        
+                           @RequestParam String clientCaptchaResponse,
+                           @RequestParam Boolean usegravatar) {        
         try {
             if (!captchaService.validateCaptcha(clientCaptchaResponse)) {
                 return "redirect:register?invalid_captcha";
@@ -94,6 +95,10 @@ public class MainController {
             return "redirect:register?duplicate_username";
         }
         if (user.getPassword().equals(passwordRepeat)) {
+            if (usegravatar) {
+                user.setProfileGravatarInfoByEmail(user.getEmail());
+            }
+            user.obtainRandomHeader();
             userService.register(user);
         } else {
             /********************************************************
@@ -105,5 +110,19 @@ public class MainController {
             return "redirect:register?passwords_match";
         }
         return "redirect:login?registered";
+    }
+
+    @GetMapping(path = "/settings")
+    public String settings() {
+        return "settings";
+    }
+
+    @PostMapping(path = "/settings")
+    public String follow(Principal principal) {
+        User user = userRepository.findByEmail(principal.getName());
+        user.setProfileGravatarInfoByEmail(user.getEmail());
+        userRepository.save(user);
+
+        return "redirect:/?settings_saved";
     }
 }

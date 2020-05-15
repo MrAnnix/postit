@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
   <link th:if="${currentPage == 'Profile'}" rel="stylesheet" type="text/css" href="/assets/css/profile.css">
   <link th:if="${currentPage == 'Post'}" rel="stylesheet" type="text/css" href="/assets/css/post.css">
-  <link th:if="${currentPage == 'Login' || currentPage == 'Register'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
+  <link th:if="${currentPage == 'Login' || currentPage == 'Register' || currentPage == 'Settings'}" rel="stylesheet" type="text/css" href="/assets/css/login.css">
   <link th:if="${currentPage == 'Error'}" rel="stylesheet" type="text/css" href="/assets/css/error.css">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name=theme-color content=#fe5b5b>
@@ -59,7 +59,7 @@
                   <a class="navbar-item" th:href="@{'/user/'+${user.getId()}}">
                     <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span> Profile
                   </a>
-                  <a class="navbar-item" href="#">
+                  <a class="navbar-item" href="/settings">
                     <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span> Settings
                   </a>
                   <hr class="navbar-divider">
@@ -92,7 +92,7 @@
               <a class="navbar-item" th:href="@{'/user/'+${user.getId()}}">
                 <span class="navbar-icon"><ion-icon name="person-outline"></ion-icon></span> Profile
               </a>
-              <a class="navbar-item" href="#">
+              <a class="navbar-item" href="/settings">
                 <span class="navbar-icon"><ion-icon name="settings-outline"></ion-icon></span> Settings
               </a>
               <hr class="navbar-divider">
@@ -412,7 +412,8 @@
     </div>
     <div class="profile-description-separator"></div>
     <div class="profile-description">
-      <p class="user-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr.</p>
+      <p th:if="${viewUser.getBio() != null}" class="user-description" th:text="${viewUser.getBio()}"></p>
+      <p th:if="${viewUser.getBio() == null}" class="user-description">You can set your own biography and profile photo by using <a href="https://gravatar.com/">Gravatar</a>.</p>
     </div>
   </div>
 </body>

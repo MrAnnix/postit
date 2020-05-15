@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='Settings'">
+
+<!-- Head -->
+<head th:replace="fragments/components :: head"></head>
+
+<body>
+  <!-- Content -->
+  <section class="hero is-fullheight login-background">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <div class="login-logo">
+              <img class="login-logo-img" src="/assets/img/logo.svg" alt="Our Postit Logo">
+            </div>
+            <form id="settingsForm" class="box settings" th:action="@{/settings}" method="post">
+              <h2>Load profile info from <a href="https://gravatar.com/">Gravatar</a></h2>
+              <div class="field" style="text-align:center">
+                <button class="button login-button" type="submit" value="Load" style="margin:1rem 0">
+                  Load
+                </button>
+              </div>
+            </form>
+            <a href="https://gravatar.com/">Don´t have Gravatar?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/components :: footer"></footer>
+</body>
+
+</html>

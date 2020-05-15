@@ -1,7 +1,12 @@
 package es.raulsanmartin.postit.model;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
+import java.lang.Math;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +19,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import es.raulsanmartin.postit.MD5Util;
 
 @Entity
 public class User {
@@ -57,6 +68,8 @@ public class User {
     private String photo = "/assets/img/avatar2.png";
 
     private String header = "/assets/img/profile-header-image.jpg";
+
+    private String bio;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -138,12 +151,64 @@ public class User {
         this.photo = photo;
     }
 
+    public void setProfileGravatarInfoByEmail(String email) {
+        String hash = MD5Util.md5Hex(email.trim().toLowerCase());
+        this.photo = "https://www.gravatar.com/avatar/" + hash;
+
+        try {
+            URL gravatarEndpoint = new URL("https://www.gravatar.com/" + hash + ".json");
+            HttpsURLConnection connection = (HttpsURLConnection) gravatarEndpoint.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode != 200) {
+                throw new Exception(responseCode + " - Something went wrong");
+            }
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            String inputLine;
+		    StringBuffer gravatarResponse = new StringBuffer();
+    
+		    while ((inputLine = in.readLine()) != null) {
+		    	gravatarResponse.append(inputLine);
+		    }
+            in.close();
+
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(gravatarResponse.toString());
+            
+            JSONArray jsonArr = (JSONArray) json.get("entry");
+            JSONObject field = (JSONObject) jsonArr.get(0);
+            String bio = (String) field.get("aboutMe");
+
+            this.bio = bio;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
     public String getHeader() {
         return header;
     }
 
     public void setHeader(String header) {
         this.header = header;
+    }
+
+    public void obtainRandomHeader() {
+        this.header = "/assets/img/background" + Integer.toString((int)(Math.random() * 5) + 1) + ".jpg";
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getNick() {

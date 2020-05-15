@@ -91,6 +91,11 @@
                 </div>
               </div>
 
+              <div class="field">
+                <input type="checkbox" name="usegravatar">
+                <label for="usegravatar" class="checkbox">Use <a href="https://gravatar.com/">Gravatar</a> info for my profile.</label>                           
+              </div>
+
               <!-- Google reCaptcha v3 -->
               <span id="googleReCaptchaKeySite" class="is-hidden" th:text="${@environment.getProperty('google.recaptcha.key.site')}"></span>
               <input id="clientCaptchaResponse" type="hidden" name="clientCaptchaResponse" value="">
