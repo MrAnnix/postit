@@ -95,7 +95,7 @@ public class MainController {
             return "redirect:register?duplicate_username";
         }
         if (user.getPassword().equals(passwordRepeat)) {
-            if (usegravatar) {
+            if (usegravatar != null) {
                 user.setProfileGravatarInfoByEmail(user.getEmail());
             }
             user.obtainRandomHeader();
