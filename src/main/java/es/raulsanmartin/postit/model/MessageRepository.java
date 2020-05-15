@@ -9,6 +9,10 @@ public interface MessageRepository extends CrudRepository<Message, Integer> {
 
     List<Message> findFirst10ByResponseToIsNullOrderByTimestampDesc();
 
+    List<Message> findFirst20ByResponseToIsNullOrderByTimestampDesc();
+
+    List<Message> findFirst10ByUserInOrderByTimestampDesc(List<User> users);
+
     List<Message> findByUserOrderByTimestampDesc(User user);
 
     List<Message> findByUserAndResponseToIsNullOrderByTimestampDesc(User user);

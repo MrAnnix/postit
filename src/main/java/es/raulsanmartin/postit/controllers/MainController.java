@@ -39,13 +39,25 @@ public class MainController {
 
     @GetMapping(path = "/")
     public String mainView(Principal principal, Model model) {
-        List<Message> messages = messageRepository.findFirst10ByResponseToIsNullOrderByTimestampDesc();
-        
         User user = userRepository.findByEmail(principal.getName());
+
+        List<Message> messages = messageRepository.findFirst10ByUserInOrderByTimestampDesc(user.getFollowing());
+        if (messages.isEmpty()) messages = messageRepository.findFirst10ByResponseToIsNullOrderByTimestampDesc();
 
         model.addAttribute("user", user);
         model.addAttribute("messages", messages);
         return "main";
+    }
+
+    @GetMapping(path = "/discover")
+    public String discoverView(Principal principal, Model model) {
+        User user = userRepository.findByEmail(principal.getName());
+
+        List<Message> messages = messageRepository.findFirst20ByResponseToIsNullOrderByTimestampDesc();
+
+        model.addAttribute("user", user);
+        model.addAttribute("messages", messages);
+        return "discover";
     }
 
     @GetMapping(path = "/login")

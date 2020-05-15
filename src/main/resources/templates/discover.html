@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      th:with="currentPage='Discover'">
+  <head>
+    <title>Discover</title>
+  </head>
+
+  <body>
+    <div layout:fragment="content">
+      <div class="columns body-columns">
+        <div class="column is-three-fifths is-offset-one-fifth">
+          <div th:each="message : ${messages}">
+            <div th:replace="fragments/components :: post"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

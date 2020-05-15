@@ -3,7 +3,23 @@ function getDataByURL(url, datos, callback) {
       url: url,
       data: datos,
       success: function(response) {
-        callback(response); 
+        callback(response);
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        if (xhr.status == 404)
+            callback(xhr.responseText);
+        console.error(xhr.status + ' - ' + thrownError + '\n' + xhr.responseText);    
+      }
+    });
+}
+
+function postByURL(url, datos, callback) {
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: datos,
+      success: function(response) {
+        callback(response);
       },
       error: function(xhr, ajaxOptions, thrownError) {
         if (xhr.status == 404)

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -25,7 +27,7 @@ public class User {
 
     @Column(unique = false, nullable = false, length = 64)
     @NotBlank
-    @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$")
+    @Pattern(regexp = "^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-´`]+$")
     @Size(max = 64)
     private String name;
 
@@ -39,6 +41,18 @@ public class User {
     @NotBlank
     @Size(min = 8)
     private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="following",
+    joinColumns=@JoinColumn(name="follower_id"),
+    inverseJoinColumns=@JoinColumn(name="followed_id"))
+    private List<User> following;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="following",
+    joinColumns=@JoinColumn(name="followed_id"),
+    inverseJoinColumns=@JoinColumn(name="follower_id"))
+    private List<User> followers;
 
     private String photo = "/assets/img/avatar2.png";
 
@@ -82,6 +96,38 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    public void addFollower(User user) {
+        this.followers.add(user);
+    }
+
+    public void delFollower(User user) {
+        this.followers.remove(user);
+    }
+
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
+    public void addFollowing(User user) {
+        this.following.add(user);
+    }
+
+    public void delFollowing(User user) {
+        this.following.remove(user);
     }
 
     public String getPhoto() {

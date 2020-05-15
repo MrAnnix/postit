@@ -9,3 +9,5 @@
 - Se han añadido páginas de error personalizadas (hay sorpresas). Ahora ya no aparece la traza del error, para verla, habrá que recurrir a los logs.
 
 - Se usa el servicio reCaptcha v3 de Google en el formulario de registro. Se ha añadido el correspondiente controlador. Para configurarlo hay que editar el fichero de propiedades (application.properties) con las claves correspondientes.
+
+- Implementada función de seguir a los usuarios.

@@ -42,11 +42,8 @@
             <a class="navbar-item is-hidden-desktop" href="/" th:classappend="${currentPage == 'Home'} ? 'active'">
               <span class="navbar-icon"><ion-icon name="home-outline"></ion-icon></span>
             </a>
-            <a class="navbar-item is-hidden-desktop" href="/notifications" th:classappend="${currentPage == 'Notifications'} ? 'active'">
-              <span class="navbar-icon"><ion-icon name="notifications-outline"></ion-icon></span>
-            </a>
-            <a class="navbar-item is-hidden-desktop" href="/messages" th:classappend="${currentPage == 'Messages'} ? 'active'">
-              <span class="navbar-icon"><ion-icon name="mail-outline"></ion-icon></span>
+            <a class="navbar-item is-hidden-desktop" href="/discover" th:classappend="${currentPage == 'Discover'} ? 'active'">
+              <span class="navbar-icon"><ion-icon name="search-outline"></ion-icon></span>
             </a>
           </div>
           <div class="navbar-mobile-spacer"></div>
@@ -82,11 +79,8 @@
           <a class="navbar-item" href="/" th:classappend="${currentPage == 'Home'} ? 'active'">
             <span class="navbar-icon"><ion-icon name="home-outline"></ion-icon></span> Home
           </a>
-          <a class="navbar-item" href="/notifications" th:classappend="${currentPage == 'Notifications'} ? 'active'">
-            <span class="navbar-icon"><ion-icon name="notifications-outline"></ion-icon></span> Notifications
-          </a>
-          <a class="navbar-item" href="/messages" th:classappend="${currentPage == 'Messages'} ? 'active'">
-            <span class="navbar-icon"><ion-icon name="mail-outline"></ion-icon></span> Messages
+          <a class="navbar-item" href="/discover" th:classappend="${currentPage == 'Discover'} ? 'active'">
+            <span class="navbar-icon"><ion-icon name="search-outline"></ion-icon></span> Discover
           </a>
         </div>
         <div class="navbar-end">
@@ -119,6 +113,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" integrity="sha256-dW8u4dvEKDThJpWRwLgGugbARnA3O2wqBcVerlg9LMc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.full.min.js" integrity="sha256-7NJCSpiWM0eQMfMyrFtNZp/43bnmuIhCKH+MUt6bHKY=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script th:if="${currentPage == 'Profile'}">
+      $('#followButton').click(function follow(){
+        var action = $(this).attr('action');
+        postByURL(window.location.href + "/" + action, $('#followForm').serialize(), function (e) {
+          console.log(e);
+          var counter = $('#followersCounter');
+          var value = parseInt(counter.text());
+          var button = $('#followButton');
+          if (action == 'follow') {
+            button.text('Following');
+            button.attr('action', 'unfollow');
+            counter.text(value+1);
+          } else {
+            button.text('Follow');
+            button.attr('action', 'follow');
+            counter.text(value-1);
+          }
+        });
+      });
+    </script>
   </footer>    
 
   <div class="card" th:fragment="post">
@@ -345,35 +359,42 @@
 
   <div class="profile-header" th:fragment="profile-header">
     <div class="profile-header-image">
-      <img class="header-image" th:src="${user.getHeader()}" alt="Profile header image">
+      <img class="header-image" th:src="${viewUser.getHeader()}" alt="Profile header image">
     </div>
   
     <div class="profile-header-data">
       <div class="profile-header-user-image image">
-        <img class="profile-header-user-image__ is-rounded" th:src="${user.getPhoto()}" alt="profile image">
+        <img class="profile-header-user-image__ is-rounded" th:src="${viewUser.getPhoto()}" alt="profile image">
       </div>
       <div class="profile-header-data__">
         <div class="profile-header-metadata">
-          <h2 class="user-profilename" th:text="${user.getName()}"></h2>
-          <h3 class="user-username" th:text="${user.getNick()}"></h3>
+          <h2 class="user-profilename" th:text="${viewUser.getName()}"></h2>
+          <h3 class="user-username" th:text="${viewUser.getNick()}"></h3>
         </div>
   
         <div class="profile-header-buttons">
           <div class="profile-details">
             <div class="counter">
-              <a class="following-counter" href="/"><span class="counter-number">49</span>
+              <a class="following-counter" href="/"><span id="followingCounter" class="counter-number" th:text="${viewUser.getFollowing().size()}">0</span>
             <span class="counter-label">Following</span>
             </a>
             </div>
             <div class="counter">
-              <a class="followers-counter" href="/"><span class="counter-number">235</span>
+              <a class="followers-counter" href="/"><span id="followersCounter"class="counter-number" th:text="${viewUser.getFollowers().size()}">0</span>
             <span class="counter-label">Followers</span>
             </a>
             </div>
           </div>
           <div class="profile-spacer"></div>
           <div class="profile-follow-button">
-            <button type="button" name="follow-button" class="follow-button">Follow</button>
+            <form id="followForm" th:action="@{#}" method="post"></form>
+            <button id="followButton" th:target="${viewUser.getId()}"
+                    name="follow-button" class="follow-button"
+                    th:action="${following} ? 'unfollow' : 'follow'" th:text="${following} ? 'Following' : 'Follow'"
+                    th:if="${viewUser.getId() != user.getId()}">
+              Status
+            </button>
+            
           </div>
         </div>
       </div>
