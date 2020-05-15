@@ -3,16 +3,20 @@ package es.raulsanmartin.postit.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import java.util.Date;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,6 +48,68 @@ public class PostController {
         model.addAttribute("user", user);
         model.addAttribute("message", message.get());
         return "post";
+    }
+
+    @GetMapping(path = "/{id}/like", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String _like(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        return "{\"status\":\"failed\",\"error\":\"method not allowed\"}";
+    }
+
+    @PostMapping(path = "/{id}/like")
+    @ResponseBody
+    public String like(@PathVariable(value="id") int postId, Principal principal, HttpServletResponse response) {
+        Optional<Message> _message = messageRepository.findById(postId);
+        if (!_message.isPresent()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "{\"status\":\"failed\",\"error\":\"Message not found\"}";
+        }
+
+        User user = userRepository.findByEmail(principal.getName());
+        Message message = _message.get();
+
+        try {
+            message.addLike(user);
+        } catch (Throwable t) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "{\"status\":\"failed\",\"error\":\""+ t.getStackTrace().toString().replace("\"", "\\\"") + "\"}";
+        }
+
+        messageRepository.save(message);
+
+        return "{\"id\":\"" + message.getId() + "\",\"status\":\"liked\"}";
+    }
+
+    @GetMapping(path = "/{id}/unlike", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String _unlike(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        return "{\"status\":\"failed\",\"error\":\"method not allowed\"}";
+    }
+
+    @PostMapping(path = "/{id}/unlike")
+    @ResponseBody
+    public String unlike(@PathVariable(value="id") int postId, Principal principal, HttpServletResponse response) {
+        Optional<Message> _message = messageRepository.findById(postId);
+        if (!_message.isPresent()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "{\"status\":\"failed\",\"error\":\"Message not found\"}";
+        }
+
+        User user = userRepository.findByEmail(principal.getName());
+        Message message = _message.get();
+
+        try {
+            message.delLike(user);
+        } catch (Throwable t) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "{\"status\":\"failed\",\"error\":\""+ t.getStackTrace().toString().replace("\"", "\\\"") + "\"}";
+        }
+
+        messageRepository.save(message);
+
+        return "{\"id\":\"" + message.getId() + "\",\"status\":\"not-liked\"}";
     }
 
     @GetMapping(path = "/{id}/responses")

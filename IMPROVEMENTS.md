@@ -10,4 +10,6 @@
 
 - Se usa el servicio reCaptcha v3 de Google en el formulario de registro. Se ha añadido el correspondiente controlador. Para configurarlo hay que editar el fichero de propiedades (application.properties) con las claves correspondientes.
 
-- Implementada función de seguir a los usuarios.
+- Implementada función de seguir a los usuarios. En la vista principal, si no se sigue a ningún usuario, se muestran los últimos 10 mensajes de la red, si no, se mostrarán los 10 últimos mensajes de los perfiles a los que sigues (si los hubiera). Se ha añadido una pestaña llamada "discover" que muestra los 20 últimos mensajes de la red, para facilitar el descubrimiento de nuevos usuarios.
+
+- Se ha añadido la funcionalidad "me gusta" a los mensajes. Ahora, los usuarios pueden marcar como favoritos los mensajes que ellos elijan.

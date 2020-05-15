@@ -33,6 +33,20 @@ function markActions() {
     $(".acciones a:not(.no-toggable)").filter(":not(.has-listener)")
         .addClass("has-listener")
         .click(function () {
+            var target = $(this).attr('target');
+            var action = $(this).attr('action');
+            postByURL("/post/" + target + "/" + action, $("#likeForm").serialize(), function (e) {
+                console.log(e);
+            });
+            var counter = $(this).children(".likes-counter");
+            var value = parseInt(counter.text());
+            if (action == "like") {
+                counter.text(value+1);
+                $(this).attr("action", "unlike");
+            } else {
+                counter.text(value-1);
+                $(this).attr("action", "like");
+            }
             $(this).toggleClass("accion-activa");
         });
 };

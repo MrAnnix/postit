@@ -209,6 +209,12 @@ a.app-name:hover, a.app-name:active, a.app-name:visited {
     color: var(--action-icon-active);
 }
 
+.acciones a.like .likes-counter {
+    color: var(--datos-meta);
+    font-size: 12px;
+    padding-left: 6px;
+}
+
 .acciones a.post-link {
     color: var(--link);
 }

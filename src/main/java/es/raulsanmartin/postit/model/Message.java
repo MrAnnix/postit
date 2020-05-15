@@ -1,10 +1,14 @@
 package es.raulsanmartin.postit.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,6 +29,10 @@ public class Message {
 
     @ManyToOne
     private Message responseTo;
+
+    @ManyToMany
+    @JoinTable(name="likes")
+    private List<User> likes;
 
     @Column(nullable = false)
     private long timestamp;
@@ -59,6 +67,26 @@ public class Message {
 
     public void setResponseTo(Message responseTo) {
         this.responseTo = responseTo;
+    }
+
+    public List<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<User> likes) {
+        this.likes = likes;
+    }
+
+    public void addLike(User user) {
+        this.likes.add(user);
+    }
+
+    public void delLike(User user) {
+        this.likes.remove(user);
+    }
+
+    public Boolean isLiked(User user) {
+        return likes.contains(user);
     }
 
     public long getTimestamp() {

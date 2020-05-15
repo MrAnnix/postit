@@ -107,6 +107,8 @@
   </header>
 
   <footer th:fragment="footer">
+    <form th:if="${currentPage != 'Login' || currentPage != 'Register'}" id="likeForm" th:action="@{#}" method="post"></form>
+
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
@@ -158,11 +160,10 @@
                 <a class="level-item no-toggable accion-reply">
                   <span class="icon is-small"><i class="fas fa-reply"></i></span>
                 </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                </a>
-                <a class="level-item">
+                <a th:class="${message.isLiked(user)} ? 'level-item like accion-activa' : 'level-item like'"
+                   th:target="${message.getId()}" th:action="${message.isLiked(user)} ? 'unlike' : 'like'">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                  <span class="likes-counter" th:text="${message.getLikes().size()}">0</span>
                 </a>
               </div>
               <div class="level-right">
@@ -256,11 +257,10 @@
                 <a class="level-item no-toggable accion-reply">
                   <span class="icon is-small"><i class="fas fa-reply"></i></span>
                 </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                </a>
-                <a class="level-item">
+                <a th:class="${message.isLiked(user)} ? 'level-item like accion-activa' : 'level-item like'"
+                   th:target="${message.getId()}" th:action="${message.isLiked(user)} ? 'unlike' : 'like'">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                  <span class="likes-counter" th:text="${message.getLikes().size()}">0</span>
                 </a>
               </div>
               <div class="level-right">
@@ -321,11 +321,10 @@
                 <a class="level-item no-toggable accion-reply">
                   <span class="icon is-small"><i class="fas fa-reply"></i></span>
                 </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                </a>
-                <a class="level-item">
+                <a th:class="${message.isLiked(user)} ? 'level-item like accion-activa' : 'level-item like'"
+                   th:target="${message.getId()}" th:action="${message.isLiked(user)} ? 'unlike' : 'like'">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                  <span class="likes-counter" th:text="${message.getLikes().size()}">0</span>
                 </a>
               </div>
               <div class="level-right">
