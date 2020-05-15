@@ -13,3 +13,7 @@
 - Implementada función de seguir a los usuarios. En la vista principal, si no se sigue a ningún usuario, se muestran los últimos 10 mensajes de la red, si no, se mostrarán los 10 últimos mensajes de los perfiles a los que sigues (si los hubiera). Se ha añadido una pestaña llamada "discover" que muestra los 20 últimos mensajes de la red, para facilitar el descubrimiento de nuevos usuarios.
 
 - Se ha añadido la funcionalidad "me gusta" a los mensajes. Ahora, los usuarios pueden marcar como favoritos los mensajes que ellos elijan.
+
+- Los usuarios obtienen una imagen de fondo de perfil de forma aleatoria durante el registro.
+
+- Los usuarios pueden establecer una imagen de perfil y una descripción a traves de Gravatar. Pueden elegir sincronizar la información al registrarse o posteriormente desde la pestaña de ajustes (///settings/).

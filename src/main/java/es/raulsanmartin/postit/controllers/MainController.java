@@ -75,7 +75,7 @@ public class MainController {
                            BindingResult bindingResult,
                            @RequestParam String passwordRepeat,
                            @RequestParam String clientCaptchaResponse,
-                           @RequestParam Boolean usegravatar) {        
+                           @RequestParam(required = false) Boolean usegravatar) {        
         try {
             if (!captchaService.validateCaptcha(clientCaptchaResponse)) {
                 return "redirect:register?invalid_captcha";
