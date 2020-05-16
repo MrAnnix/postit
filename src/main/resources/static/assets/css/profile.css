@@ -24,8 +24,8 @@
 }
 
 .header-image {
-  object-fit: fill;
-  height: 300px;
+  object-fit: cover;
+  overflow: hidden;
   width: 100%;
 }
 
