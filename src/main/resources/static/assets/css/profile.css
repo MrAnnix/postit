@@ -26,6 +26,7 @@
 .header-image {
   object-fit: cover;
   overflow: hidden;
+  height: 300px;
   width: 100%;
 }
 
