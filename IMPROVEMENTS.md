@@ -17,3 +17,5 @@
 - Los usuarios obtienen una imagen de fondo de perfil de forma aleatoria durante el registro.
 
 - Los usuarios pueden establecer una imagen de perfil y una descripción a traves de Gravatar. Pueden elegir sincronizar la información al registrarse o posteriormente desde la pestaña de ajustes (///settings/).
+
+- Los usuarios pueden editar su propia biografía desde la página de ajustes (///settings/).
