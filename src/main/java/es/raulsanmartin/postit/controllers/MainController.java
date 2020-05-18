@@ -113,14 +113,31 @@ public class MainController {
     }
 
     @GetMapping(path = "/settings")
-    public String settings() {
+    public String settings(Principal principal, Model model) {
+        User user = userRepository.findByEmail(principal.getName());
+
+        model.addAttribute("user", user);
+
         return "settings";
     }
 
     @PostMapping(path = "/settings")
-    public String follow(Principal principal) {
+    public String follow(Principal principal,
+                         @RequestParam(required = false) String bio,
+                         @RequestParam(required = false) Boolean usegravatar) {
+
         User user = userRepository.findByEmail(principal.getName());
-        user.setProfileGravatarInfoByEmail(user.getEmail());
+
+        if (usegravatar != null) {
+            user.setProfileGravatarInfoByEmail(user.getEmail());
+        } else if (!bio.equals("")) {
+            if (bio.length() <= 280) {
+                user.setBio(bio);
+            } else {
+                return "redirect:settings?long__bio";
+            }
+        }
+        
         userRepository.save(user);
 
         return "redirect:/?settings_saved";

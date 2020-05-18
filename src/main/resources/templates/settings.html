@@ -12,15 +12,32 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
-          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <div class="column is-6">
             <div class="login-logo">
               <img class="login-logo-img" src="/assets/img/logo.svg" alt="Our Postit Logo">
             </div>
+
             <form id="settingsForm" class="box settings" th:action="@{/settings}" method="post">
-              <h2>Load profile info from <a href="https://gravatar.com/">Gravatar</a></h2>
-              <div class="field" style="text-align:center">
-                <button class="button login-button" type="submit" value="Load" style="margin:1rem 0">
-                  Load
+              <p th:if="${param.long_bio}" class="has-text-danger">
+                The has more than 280 characters.
+              </p>
+              <div class="field">
+                <label for="" class="label" th:field="*{bio}">Biography</label>
+                <div class="control">
+                  <textarea class="textarea has-fixed-size" style="max-height: 10vh" type="text" name="bio" th:text="${user.getBio()}"></textarea>
+                </div>
+              </div>
+
+              <div class="field">
+                <input type="checkbox" name="usegravatar">
+                <label for="usegravatar" class="checkbox">Use <a href="https://gravatar.com/">Gravatar</a> info for my profile.</label>                           
+              </div>
+
+              <div class="field">
+                <button class="button login-button" onclick="history.back()" style="margin:1rem 0"><i class="fa fa-arrow-left"></i></button>
+
+                <button class="button login-button" type="submit" value="Save" style="margin:1rem 0">
+                  Save settings
                 </button>
               </div>
             </form>
