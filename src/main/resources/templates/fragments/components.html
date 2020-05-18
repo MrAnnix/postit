@@ -149,7 +149,7 @@
           <div class="media-content">
             <div class="content">
               <div class="datos">
-                <span class="autor" th:text="${message.getUser().getName()}"></span>
+                <a class="autor" th:href="@{'/user/'+${message.getUser().getId()}}" th:text="${message.getUser().getName()}"></a>
                 <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
                 <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
               </div>
@@ -245,7 +245,7 @@
           </figure>
           <div class="media-content">
             <div class="datos">
-              <span class="autor" th:text="${message.getUser().getName()}"></span>
+              <a class="autor" th:href="@{'/user/'+${message.getUser().getId()}}" th:text="${message.getUser().getName()}"></a>
               <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
               <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
             </div>
@@ -310,7 +310,7 @@
           <div class="media-content">
             <div class="content">
               <div class="datos">
-                <span class="autor" th:text="${message.getUser().getName()}"></span>
+                <a class="autor" th:href="@{'/user/'+${message.getUser().getId()}}" th:text="${message.getUser().getName()}"></a>
                 <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
                 <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
               </div>
