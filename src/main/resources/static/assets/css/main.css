@@ -176,7 +176,7 @@ a.app-name:hover, a.app-name:active, a.app-name:visited {
     font-weight: bold;
 }
 
-.datos .nombre-usuario, .datos .fecha {
+.datos .nombre-usuario, .datos .fecha, .datos .response-ref {
     color: var(--datos-meta);
     font-size: small;
 }

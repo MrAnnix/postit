@@ -247,6 +247,7 @@
             <div class="datos">
               <a class="autor" th:href="@{'/user/'+${message.getUser().getId()}}" th:text="${message.getUser().getName()}"></a>
               <span class="nombre-usuario" th:text="${message.getUser().getNick()}"></span>
+              <span class="response-ref" th:if="${original != null}">in response to <a th:href="@{'/post/'+${original.getId()}}" th:text="${original.getUser().getNick()}"></a></span>
               <span class="fecha" th:timestamp="${message.getTimestamp()}"></span>
             </div>
             <div class="content">

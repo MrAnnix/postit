@@ -38,15 +38,21 @@ public class PostController {
 
     @GetMapping(path = "/{id}")
     public String postView(@PathVariable(value="id") int postId, Principal principal, Model model) {
-        Optional<Message> message = messageRepository.findById(postId);
-        if (!message.isPresent()) {
+        Optional<Message> _message = messageRepository.findById(postId);
+        if (!_message.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Message not found");
         }
+
+        Message message = _message.get();
+
+        // Mensaje del cual es (puede ser) respuesta
+        Message original = message.getResponseTo();
 
         User user = userRepository.findByEmail(principal.getName());
 
         model.addAttribute("user", user);
-        model.addAttribute("message", message.get());
+        model.addAttribute("message", message);
+        model.addAttribute("original", original);
         return "post";
     }
 
