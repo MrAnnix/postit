@@ -15,6 +15,8 @@ chmod +x gradlew
 # Go to http://localhost:8080
 ```
 
+Para una demo completa puedes acceder [aquí](https://postit.raulsanmartin.me/).
+
 ## Mejoras
 - Añadida casilla "remember me" al formulario de login. Si esta casilla se marca, se otorga una cookie con una expiración de un día, en vez de solo la de sesión. De esta forma, aunque el usuario cierre el navegador, al volverlo a abrir, mantiene su sesión iniciada.
 
